@@ -1,76 +1,104 @@
 <!--VITE PLUS START-->
 
-# Using Vite+, the Unified Toolchain for the Web
+# Vite+ First Project Instructions
 
-This project is using Vite+, a unified toolchain built on top of Vite, Rolldown, Vitest, tsdown, Oxlint, Oxfmt, and Vite Task. Vite+ wraps runtime management, package management, and frontend tooling in a single global CLI called `vp`. Vite+ is distinct from Vite, but it invokes Vite through `vp dev` and `vp build`.
+This repository is a Vite+ first static-site starter built with `Pug`, `SCSS`, and `JavaScript`.
+Treat `vp` as the primary interface for runtime management, dependency installation, development, quality checks, hooks, CI, and production builds.
 
-## Vite+ Workflow
+## Current Project Shape
 
-`vp` is a global binary that handles the full development lifecycle. Run `vp help` to print a list of commands and `vp <command> --help` for information about a specific command.
+- Runtime is pinned with `.node-version` to Node.js `22`
+- Dependency installation is standardized on `vp install`
+- Quality checks are standardized on `vp run quality`
+- Distributable builds are standardized on `vp run build:dist`
+- CI is standardized on `vp run ci`
+- `CLAUDE.md` and `.cursor/rules/viteplus.mdc` point at this file
 
-### Start
+## Standard Workflow
 
-- create - Create a new project from a template
-- migrate - Migrate an existing project to Vite+
-- config - Configure hooks and agent integration
-- staged - Run linters on staged files
-- install (`i`) - Install dependencies
-- env - Manage Node.js versions
+Run these in order for normal local work:
 
-### Develop
+1. `vp env install`
+2. `vp install`
+3. `vp dev`
+4. `vp run quality`
+5. `vp run build:dist`
 
-- dev - Run the development server
-- check - Run format, lint, and TypeScript type checks
-- lint - Lint code
-- fmt - Format code
-- test - Run tests
+If the runtime looks wrong, check it with `vp env current`.
 
-### Execute
+## Task Map
 
-- run - Run monorepo tasks
-- exec - Execute a command from local `node_modules/.bin`
-- dlx - Execute a package binary without installing it as a dependency
-- cache - Manage the task cache
+These tasks are defined by the current repo configuration:
 
-### Build
+- `vp run quality`
+  - Runs `vp check`
+  - Runs `vp test`
+  - Runs `vp run format:templates:check`
+- `vp run build:dist`
+  - Runs `vp build`
+  - Runs `node scripts/format-build-html.mjs`
+- `vp run ci`
+  - Runs `vp run quality`
+  - Runs `vp run build:dist`
 
-- build - Build for production
-- pack - Build libraries
-- preview - Preview production build
+## Formatting, Linting, and Testing
 
-### Manage Dependencies
+Use the tools according to file type:
 
-Vite+ automatically detects and wraps the underlying package manager such as pnpm, npm, or Yarn through the `packageManager` field in `package.json` or package manager-specific lockfiles.
+- JS / SCSS / HTML
+  - Use `vp check`, `vp lint`, and `vp fmt`
+- Pug / Markdown
+  - Use `vp run format:templates`
+  - Use `vp run format:templates:check`
 
-- add - Add packages to dependencies
-- remove (`rm`, `un`, `uninstall`) - Remove packages from dependencies
-- update (`up`) - Update packages to latest versions
-- dedupe - Deduplicate dependencies
-- outdated - Check for outdated packages
-- list (`ls`) - List installed packages
-- why (`explain`) - Show why a package is installed
-- info (`view`, `show`) - View package information from the registry
-- link (`ln`) / unlink - Manage local package links
-- pm - Forward a command to the package manager
+Important distinction:
 
-### Maintain
+- `vp build` is the raw Vite build
+- `vp run build:dist` is the distributable build for this template
 
-- upgrade - Update `vp` itself to the latest version
+Do not replace `vp run build:dist` with `vp build` when the user is asking for the final deliverable build.
 
-These commands map to their corresponding tools. For example, `vp dev --port 3000` runs Vite's dev server and works the same as Vite. `vp test` runs JavaScript tests through the bundled Vitest. The version of all tools can be checked using `vp --version`. This is useful when researching documentation, features, and bugs.
+## Files That Matter Most
 
-## Common Pitfalls
+- `vite.config.ts`
+  - Source of truth for `build`, `test`, `run`, and `staged`
+- `config.js`
+  - Build-time site options such as `basePath`, `hashMode`, and output paths
+- `scripts/format-build-html.mjs`
+  - Post-build formatter for `dist/**/*.html` only
+- `.github/workflows/ci.yml`
+  - Mirrors the local `vp` workflow in CI
+- `package.json`
+  - Provides the current `vp`-based script aliases
 
-- **Using the package manager directly:** Do not use pnpm, npm, or Yarn directly. Vite+ can handle all package manager operations.
-- **Always use Vite commands to run tools:** Don't attempt to run `vp vitest` or `vp oxlint`. They do not exist. Use `vp test` and `vp lint` instead.
-- **Running scripts:** Vite+ commands take precedence over `package.json` scripts. If there is a `test` script defined in `scripts` that conflicts with the built-in `vp test` command, run it using `vp run test`.
-- **Do not install Vitest, Oxlint, Oxfmt, or tsdown directly:** Vite+ wraps these tools. They must not be installed directly. You cannot upgrade these tools by installing their latest versions. Always use Vite+ commands.
-- **Use Vite+ wrappers for one-off binaries:** Use `vp dlx` instead of package-manager-specific `dlx`/`npx` commands.
-- **Import JavaScript modules from `vite-plus`:** Instead of importing from `vite` or `vitest`, all modules should be imported from the project's `vite-plus` dependency. For example, `import { defineConfig } from 'vite-plus';` or `import { expect, test, vi } from 'vite-plus/test';`. You must not install `vitest` to import test utilities.
-- **Type-Aware Linting:** There is no need to install `oxlint-tsgolint`, `vp lint --type-aware` works out of the box.
+## Rules for Agents
+
+- Always prefer `vp` over `npm`, `pnpm`, `yarn`, `npx`, or direct tool binaries when a Vite+ equivalent exists
+- Do not install `vitest`, `oxlint`, `oxfmt`, or `tsdown` directly
+- Do not use package-manager-specific install commands for normal project work; use `vp install`
+- For CI-like validation, use `vp run ci`
+- For normal pre-commit validation, use `vp run quality`
+- For template-only formatting, use `vp run format:templates`
+- Keep runtime assumptions aligned with `.node-version`
+- If you add new workflow steps, prefer defining them in `vite.config.ts` `run.tasks` before inventing new ad hoc commands
+
+## Common Pitfalls in This Repo
+
+- Running `vp build` and assuming the build is ready for delivery
+  - It is not; delivery uses `vp run build:dist`
+- Sending Pug files through only `vp check`
+  - Pug formatting is covered by the template formatting task, not by `vp check`
+- Using direct `prettier` commands in documentation or workflow guidance
+  - Prefer the existing `vp run format:templates` entry points
+- Describing CI with `npm ci` or `npm run ...`
+  - The current CI path is `vp install --frozen-lockfile` then `vp run ci`
 
 ## Review Checklist for Agents
 
-- [ ] Run `vp install` after pulling remote changes and before getting started.
-- [ ] Run `vp check` and `vp test` to validate changes.
+- [ ] Run `vp env install` if the runtime may not match `.node-version`
+- [ ] Run `vp install` after dependency or lockfile changes
+- [ ] Run `vp run quality` for code, template, or config changes
+- [ ] Run `vp run build:dist` when touching build, templates, assets, or delivery behavior
+- [ ] Keep docs and examples aligned with `vp run quality`, `vp run build:dist`, and `vp run ci`
+
 <!--VITE PLUS END-->

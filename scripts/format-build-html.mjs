@@ -17,6 +17,7 @@ const htmlFiles = await glob("**/*.html", {
   nodir: true,
 });
 
+// Keep built JS/CSS minified; only normalize distributed HTML for inspection.
 await Promise.all(
   htmlFiles.map(async (filePath) => {
     const source = await readFile(filePath, "utf-8");

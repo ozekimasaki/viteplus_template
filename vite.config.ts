@@ -94,8 +94,26 @@ const plugins = [
 ];
 
 export default defineConfig({
+  test: {
+    include: ["**/*.test.js"],
+  },
+  run: {
+    tasks: {
+      quality: {
+        command: "vp check && vp test && vp run format:templates:check",
+        cache: false,
+      },
+      ci: {
+        command: "vp run quality && vp run build:dist",
+        cache: false,
+      },
+    },
+  },
   staged: {
-    "*": "vp check --fix",
+    "**/*.{js,mjs,cjs,jsx,ts,tsx,scss,css,html,json}": "vp check --fix",
+    "**/*.pug": "vp exec prettier --plugin=@prettier/plugin-pug --write",
+    "**/*.{md,mdc,MD}": "vp exec prettier --write",
+    "README.MD": "vp exec prettier --write",
   },
   lint: {
     plugins: ["unicorn", "oxc"],

@@ -1,0 +1,21 @@
+# Cursor Project Rules
+
+Source of truth: `AGENTS.md`
+
+This project is a `Vite+ First` static-site starter.
+Use the same instructions as `AGENTS.md`, including:
+
+- Use `vp` as the primary interface
+- Use `vp env install` to align with `.node-version`
+- Use `vp install` for dependency sync
+- Use `vp run quality` for normal validation
+- Use `vp run build:dist` for distributable builds
+- Use `vp run ci` for CI-equivalent validation
+- Use `vp run format:templates(:check)` for `Pug` and `Markdown`
+- Use `vp check` / `vp lint` / `vp fmt` for JS, SCSS, and HTML
+
+Important:
+
+- `vp build` is not the final deliverable build
+- CI is `vp install --frozen-lockfile` followed by `vp run ci`
+- `vite.config.ts` is the source of truth for `test`, `run`, and `staged`

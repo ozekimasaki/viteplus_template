@@ -1,8 +1,8 @@
 extends ./_layout.pug
 block vars
   -
-    var meta_title = "Vite+ Pug Starter";
-    var meta_description = "Vite+ / Pug / SCSS / JavaScript の現行構成に合わせたスタータートップページ";
+    var meta_title = "Vite+ First Static Site Starter";
+    var meta_description = "Vite+ / Pug / SCSS / JavaScript を runtime・品質・CI まで統一したスタータートップページ";
     var page_type = "website";
     var page_name = "home";
 block outside
@@ -18,34 +18,37 @@ block contents
 
     section.home-page__hero
       .home-page__hero-copy
-        p.home-page__eyebrow.base-anime(data-anim-preset="fade-right") Vite+ Unified Starter
-        h1.home-page__headline.base-anime(data-anim-duration="0.95", data-anim-delay="0.08")
-          | Pugで設計し、
+        p.home-page__eyebrow.base-anime(data-anim-preset="fade-right") Vite+ First Starter
+        h1.home-page__headline.base-anime(
+          data-anim-duration="0.95",
+          data-anim-delay="0.08"
+        )
+          | ページ制作を、
           br
-          | SCSSで整え、
+          | ローカル差分なく、
           br
-          | Vite+で素早く仕上げる。
+          | `vp` で回し切る。
         p.home-page__lead.base-anime(data-anim-delay="0.18")
-          | このテンプレートは、マルチページの Pug 構成と SCSS partial、
-          | ES Modules、画像アセット処理をまとめて扱える現行構成です。
-          | 最初の 1 ページ目として、そのまま案件向けトップページへ育てられます。
+          | このテンプレートは、Pug / SCSS / JavaScript の静的サイト制作に
+          | runtime 固定、品質チェック、commit hook、CI まで載せた Vite+ First 構成です。
+          | ページ実装だけでなく、運用導線まで最初から同じ `vp` で回せます。
         .home-page__hero-actions.base-anime(data-anim-delay="0.28")
           a.home-page__button.home-page__button--primary(href="#workflow") 開発フローを見る
-          a.home-page__button.home-page__button--ghost(href="#structure") 構成を確認する
+          a.home-page__button.home-page__button--ghost(href="#benefits") 利点を確認する
         ul.home-page__hero-metrics(
           data-anim-target="> li",
           data-anim-stagger="0.1",
           data-anim-delay="0.38"
         )
           li.base-anime
-            strong Pug
-            span レイアウト継承と partial 分割
+            strong Runtime
+            span `.node-version` と `vp env`
           li.base-anime
-            strong SCSS
-            span 変数と partial をまとめて管理
+            strong Quality
+            span `vp run quality` で一括確認
           li.base-anime
-            strong Vite+
-            span `vp` ベースの統一ワークフロー
+            strong Delivery
+            span `vp run build:dist` で納品導線まで統一
 
       aside.home-page__hero-panel(
         data-anim-target="> .home-page__panel-card",
@@ -56,13 +59,16 @@ block contents
         .home-page__panel-card.base-anime
           p.home-page__panel-label Current stack
           ul.home-page__stack-list
-            li Vite+ / Rolldown ベースの高速ビルド
-            li Pug レイアウト + 静的マルチページ出力
-            li Sass partial と JS モジュールの同時運用
-            li GSAP / Splide を含む拡張余地
+            li `vp env` で Node runtime を固定
+            li `vp install` で lockfile 基準の依存同期
+            li `vp staged` と `vp run ci` でローカルと CI を接続
+            li Pug / SCSS / JS の静的サイト制作をそのまま継続
         .home-page__panel-card.base-anime
           p.home-page__panel-label Quick commands
           ul.home-page__command-list
+            li
+              code vp env install
+              span Node 22 を同期
             li
               code vp install
               span 依存関係を同期
@@ -70,36 +76,39 @@ block contents
               code vp dev
               span ローカル確認を開始
             li
-              code vp check
-              span フォーマット・Lint・型検査
+              code vp run quality
+              span 品質チェックを一括実行
             li
-              code vp build
-              span 本番用にビルド
+              code vp run build:dist
+              span 配布用 HTML まで整形
+            li
+              code vp run ci
+              span CI 相当の流れを再現
 
-    section#overview.home-page__section.base-anime(data-anim-start="top 78%")
+    section#benefits.home-page__section.base-anime(data-anim-start="top 78%")
       .home-page__section-heading
-        p.home-page__section-label Capabilities
-        h2.home-page__section-title 今の環境で、そのまま着手できること
+        p.home-page__section-label Benefits
+        h2.home-page__section-title Vite+ を主導線にする利点を、そのまま使えます
         p.home-page__section-lead
-          | テンプレート、スタイル、スクリプト、アセットの入口が揃っているので、
-          | 必要な箇所からすぐ案件向けに差し替えられます。
+          | このテンプレートは見た目の土台だけではなく、
+          | runtime、install、quality、delivery の判断点を先に潰してあります。
       .home-page__feature-grid
         article.home-page__feature
           p.home-page__feature-index 01
-          h3 Pug multi-page
-          p `src/**/*.pug` がそのまま HTML 化されるため、ページ単位の量産がしやすい構成です。
+          h3 Runtime が揃う
+          p `.node-version` と `vp env install` を前提にすることで、Node 差分を制作初期から減らせます。
         article.home-page__feature
           p.home-page__feature-index 02
-          h3 SCSS partials
-          p `main.scss` から partial を束ねる構成なので、案件単位のテーマ調整にも向いています。
+          h3 Command surface が狭い
+          p `install`、`check`、`test`、`build`、`ci` を `vp` に寄せることで、運用説明が短くなります。
         article.home-page__feature
           p.home-page__feature-index 03
-          h3 Modern JS entry
-          p `main.js` で共通初期化を一元管理でき、Scroll アニメーションの導線も既にあります。
+          h3 品質ゲートが一貫する
+          p `vp run quality` で JS / SCSS / HTML と template 整形確認までまとめて同じ流れに載せられます。
         article.home-page__feature
           p.home-page__feature-index 04
-          h3 Asset pipeline
-          p 画像や CSS / JS の出力先が整理されており、ビルド後の配信構成も読みやすいままです。
+          h3 納品導線まで定義済み
+          p `vp build` と `vp run build:dist` を分けることで、純粋 build と配布 build の責務を混ぜません。
 
     section#workflow.home-page__section.base-anime(
       data-anim-start="top 78%",
@@ -107,52 +116,60 @@ block contents
     )
       .home-page__section-heading
         p.home-page__section-label Workflow
-        h2.home-page__section-title 開発フローを 4 ステップで回せます
+        h2.home-page__section-title 開発フローを 5 ステップで回せます
       ol.home-page__workflow
         li.home-page__workflow-step
           span.home-page__workflow-number 01
           div
             h3
-              code vp install
-            p 依存関係を同期し、プロジェクトの実行環境を揃えます。
+              code vp env install
+            p `.node-version` に合わせて Node 22 系を揃え、ローカル差分を減らします。
         li.home-page__workflow-step
           span.home-page__workflow-number 02
+          div
+            h3
+              code vp install
+            p lockfile 基準で依存関係を同期し、Vite+ 前提の実行環境を固定します。
+        li.home-page__workflow-step
+          span.home-page__workflow-number 03
           div
             h3
               code vp dev
             p Pug / SCSS / JS を監視しながら、ローカルで即時に反映を確認します。
         li.home-page__workflow-step
-          span.home-page__workflow-number 03
-          div
-            h3
-              code vp check
-            p フォーマット、Lint、TypeScript チェックをまとめて通して整合性を確認します。
-        li.home-page__workflow-step
           span.home-page__workflow-number 04
           div
             h3
-              code vp build
-            p 設定した出力先に本番出力し、静的ファイル一式として確認・納品できます。
+              code vp run quality
+            p `vp check`、`vp test`、テンプレート整形チェックをまとめて通します。
+        li.home-page__workflow-step
+          span.home-page__workflow-number 05
+          div
+            h3
+              code vp run build:dist
+            p `vp build` の後に配布用 HTML を整形し、納品向けの dist を作ります。
 
     section#structure.home-page__section.base-anime(data-anim-start="top 78%")
       .home-page__section-heading
-        p.home-page__section-label Structure
-        h2.home-page__section-title 触り始める場所がすぐ分かる構成です
+        p.home-page__section-label System Map
+        h2.home-page__section-title どこを触れば Vite+ First 運用を伸ばせるかが明確です
       .home-page__structure-grid
         article.home-page__structure-card
+          h3 vite.config.ts
+          p build、test、run、staged の設定中枢です。Vite+ を最大活用するならまずここを拡張します。
+        article.home-page__structure-card
+          h3 package.json
+          p `vp` ベースの alias と補助 script を整理しています。日常導線の名前付けはここで揃えます。
+        article.home-page__structure-card
           h3 src/index.pug
-          p 公開トップページ。今回ここを現行環境向けの案内ページとして刷新しています。
+          p このページ自体が、新しい運用思想を見せるサンプルです。案件向けトップにも差し替えやすい構成です。
         article.home-page__structure-card
-          h3 src/assets/css/main.scss
-          p 全体の SCSS 入口。partial をまとめて読み込み、ページごとのスタイルもここから管理します。
-        article.home-page__structure-card
-          h3 src/assets/js/main.js
-          p 共通 JS の入口。ライブラリ初期化やページ全体で使う処理の集約ポイントです。
-        article.home-page__structure-card
-          h3 src/dev/index.pug
-          p サブディレクトリ出力の確認用ページ。配下ページのテンプレート検証にも使えます。
+          h3 .github/workflows/ci.yml
+          p `setup-vp`、`vp install --frozen-lockfile`、`vp run ci` で CI の事実を定義しています。
 
-    section#animation-guide.home-page__section.base-anime(data-anim-start="top 76%")
+    section#animation-guide.home-page__section.base-anime(
+      data-anim-start="top 76%"
+    )
       .home-page__section-heading
         p.home-page__section-label Animation API
         h2.home-page__section-title `data-*` だけでスクロール演出を指定できます
@@ -244,47 +261,45 @@ block contents
 
     section.home-page__section.home-page__section--showcase
       .home-page__showcase-media.base-anime(data-anim-preset="fade-right")
-        img(
-          src="/assets/img/img_sample.jpg",
-          alt="アセット処理サンプル",
-          loading="lazy"
-        )
+        img(src="/assets/img/img_sample.jpg", alt="アセット処理サンプル", loading="lazy")
       .home-page__showcase-copy.base-anime(
         data-anim-preset="fade-left",
         data-anim-delay="0.08"
       )
-        p.home-page__section-label Asset + JavaScript
-        h2.home-page__section-title 素材差し替えと演出追加にもそのまま進めます
+        p.home-page__section-label Operations + Delivery
+        h2.home-page__section-title 実装だけでなく、品質管理と配布まで同じ思想で進めます
         p.home-page__section-lead
-          | 画像や CSS / JS は Vite が `basePath` を反映してビルドし、JavaScript では Scroll アニメーションの導線が用意されています。
-          | まず静的な情報設計を固めてから、GSAP や Splide の追加演出に広げる進め方がしやすい構成です。
+          | `vp staged`、`vp run quality`、`vp run ci` を通すことで、
+          | ローカル確認、commit 前、CI の判定基準を揃えやすくしています。
+          | build 後は HTML だけ整形するため、minified asset を壊さずに配布物を確認できます。
         ul.home-page__checklist
-          li `main.js` で共通初期化を管理
-          li `main.scss` でページ単位の見た目を整理
-          li `config.js` の `basePath` を変えても `/dev/` 側の確認がしやすい
+          li `vp staged` で staged file ごとに formatter を振り分け
+          li `vp run quality` で check / test / template check を統合
+          li `vp run build:dist` で dist HTML だけ整形
         .home-page__status-card
-          p.home-page__status-title Ready for customization
+          p.home-page__status-title Vite+ First status
           dl.home-page__status-list
             div
-              dt Layout
-              dd `_layout.pug` 継承
+              dt Runtime
+              dd `vp env install`
             div
-              dt Style
-              dd `home-page` 専用 SCSS
+              dt Quality
+              dd `vp run quality`
             div
-              dt Build
-              dd `vp` コマンドに統一
+              dt CI
+              dd `vp run ci`
 
     section.home-page__cta.base-anime(
       data-anim-preset="zoom-in",
       data-anim-duration="0.9"
     )
-      p.home-page__section-label Ready to edit
-      h2.home-page__section-title このトップページを土台に、案件向け要素へそのまま差し替えられます
+      p.home-page__section-label Ready to evolve
+      h2.home-page__section-title このテンプレートを基点に、Vite+ First な制作環境へ広げられます
       p.home-page__section-lead
-        | ヒーロー、特徴紹介、導線、補足セクションまで揃えたので、
-        | あとは文言・画像・配色を案件仕様に寄せていけば実運用のトップページへ移行できます。
+        | ページ実装、品質管理、hook、CI、配布導線まで一度揃えてあるので、
+        | あとは案件仕様に寄せながら `vite.config.ts` と `src/` を伸ばしていけば、
+        | 運用コストを増やさずに制作システム全体を進化させられます。
       .home-page__hero-actions
         a.home-page__button.home-page__button--primary(href=pathTo("/dev/")) /dev の出力を確認
-        a.home-page__button.home-page__button--ghost(href="#overview") ページ上部へ戻る
-      p.home-page__footnote Template updated: #{new Date().toLocaleDateString("ja-JP")}
+        a.home-page__button.home-page__button--ghost(href="#benefits") 利点セクションへ戻る
+      p.home-page__footnote Template updated: #{ new Date().toLocaleDateString("ja-JP") }

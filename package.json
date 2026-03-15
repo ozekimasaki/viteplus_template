@@ -7,11 +7,14 @@
     "dev": "vp dev",
     "check": "vp check",
     "test": "vp test",
-    "build": "vp build && node scripts/format-build-html.mjs",
+    "build:dist": "vp build && node scripts/format-build-html.mjs",
+    "build": "vp run build:dist",
     "preview": "vp preview",
     "lint": "vp lint",
-    "format": "prettier --plugin=@prettier/plugin-pug --write \"src/**/*.{js,scss,pug}\" \"*.{js,md,mdc}\"",
-    "format:check": "prettier --plugin=@prettier/plugin-pug --check \"src/**/*.{js,scss,pug}\" \"*.{js,md,mdc}\"",
+    "format:templates": "vp exec prettier --plugin=@prettier/plugin-pug --write \"src/**/*.pug\" \"README.MD\" \"*.{md,mdc}\"",
+    "format:templates:check": "vp exec prettier --plugin=@prettier/plugin-pug --check \"src/**/*.pug\" \"README.MD\" \"*.{md,mdc}\"",
+    "format": "vp run format:templates",
+    "format:check": "vp run format:templates:check",
     "prepare": "vp config"
   },
   "dependencies": {

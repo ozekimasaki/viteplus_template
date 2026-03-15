@@ -16,9 +16,10 @@ block contents
       h2.test-page__title 📂 Subdirectory Build Test
       .test-page__text
         p
-          | このページは 
+          | このページは
           code= pathTo("/dev/")
-          |  ディレクトリに配置されています。
+          |
+          | ディレクトリに配置されています。
         p サブディレクトリからのビルドが正しく動作するかを確認します。
 
     //- パステスト
@@ -30,10 +31,10 @@ block contents
       .test-page__text
         p
           strong 現在のパス:
-          |  #{pathTo("/dev/index.html")}
+          | #{ pathTo("/dev/index.html") }
         p
           strong 親ディレクトリへのリンク:
-          |  
+          |
           a(href=pathTo("/")) ルート (index.html)
 
     //- 画像パステスト（階層からの参照）
