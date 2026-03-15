@@ -1,0 +1,14 @@
+// ANIMATION
+// Any element with `data-anim-*` is auto-detected. `.base-anime` only handles the pre-JS hidden state.
+.base-anime {
+  opacity: 0;
+  transform: translateY(20px);
+
+  &.is_anime {
+    opacity: 1;
+    transform: translateY(0px);
+    transition:
+      opacity var(--medium-transition-time) var(--default-ease, ease),
+      transform var(--medium-transition-time) var(--default-ease, ease);
+  }
+}

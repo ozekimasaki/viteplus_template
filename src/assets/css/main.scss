@@ -1,0 +1,44 @@
+@use "sass:math";
+@use "_partials/_variables" as *;
+@use "_partials/_mixin" as *;
+@use "_partials/_reset";
+@use "_partials/_animation";
+@use "_partials/_home-page";
+@use "_partials/_test-page";
+
+// Splide CSS
+@use "@splidejs/splide/css";
+html {
+  color: var(--color-black, #222);
+  background-color: var(--color-white, #fff);
+}
+body {
+  width: 100%;
+  min-height: 100lvh;
+  @include mq(pc) {
+    min-width: var(--width-min, 0px);
+  }
+}
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+header {
+  z-index: 3;
+  position: relative;
+}
+footer {
+  position: sticky;
+  top: 100%;
+  z-index: 2;
+}
+.main-wrapper {
+  position: relative;
+  overflow: clip;
+  z-index: 1;
+}

@@ -1,0 +1,8 @@
+{
+  "plugins": ["unicorn", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {}
+}

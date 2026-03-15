@@ -1,0 +1,67 @@
+extends ../_layout.pug
+block vars
+  -
+    var meta_title = "Subdirectory Test";
+    var meta_description = "サブディレクトリからのビルドテスト";
+    var page_type = "website";
+    var page_name = "dev";
+block outside
+
+block head
+
+block contents
+  .test-page
+    //- 階層テスト
+    section.test-page__section
+      h2.test-page__title 📂 Subdirectory Build Test
+      .test-page__text
+        p
+          | このページは 
+          code= pathTo("/dev/")
+          |  ディレクトリに配置されています。
+        p サブディレクトリからのビルドが正しく動作するかを確認します。
+
+    //- パステスト
+    section.test-page__section.base-anime(
+      data-anim-preset="fade-up",
+      data-anim-start="top 88%"
+    )
+      h2.test-page__title Path Resolution Test
+      .test-page__text
+        p
+          strong 現在のパス:
+          |  #{pathTo("/dev/index.html")}
+        p
+          strong 親ディレクトリへのリンク:
+          |  
+          a(href=pathTo("/")) ルート (index.html)
+
+    //- 画像パステスト（階層からの参照）
+    section.test-page__section.base-anime(
+      data-anim-preset="zoom-in",
+      data-anim-duration="0.9"
+    )
+      h2.test-page__title Asset Path Test (from subdirectory)
+      .test-page__images
+        .image-card
+          img(src="/assets/img/img_sample.jpg", alt="サンプル画像", loading="lazy")
+          .image-caption アセット URL はビルド時に basePath を反映
+
+    //- レスポンシブインジケーター
+    section.test-page__section.base-anime(
+      data-anim-preset="fade-left",
+      data-anim-duration="0.9"
+    )
+      h2.test-page__title Responsive Indicator
+      .test-page__responsive
+
+    //- 確認項目
+    section.test-page__section
+      h2.test-page__title ✅ Verification Checklist
+      .test-page__text
+        ul
+          li サブディレクトリからのPugコンパイル
+          li 親レイアウト (_layout.pug) の extends
+          li アセットパスの解決 (basePath 追従)
+          li CSS/JSの読み込み
+          li スクロールアニメーション動作

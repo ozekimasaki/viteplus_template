@@ -1,0 +1,13 @@
+// MEDIA QUERIES
+$breakpoint: 768px;
+@mixin mq($device: pc) {
+  @if $device==pc {
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  } @else if $device==sp {
+    @media screen and (max-width: $breakpoint) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+-
+  var default_language = "ja";
+  var default_title = "タイトル";
+  var default_url = "http://xxx.xxx/";
+  var default_description = "ディスクリプション";
+  var default_og_image = "http://xxx.xxx/";
+  var default_type = "website";
+  var page_name = "";
+block vars
+
+doctype html
+html(lang=meta_language || default_language)
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title #{ meta_title || default_title }
+    meta(name="description", content=meta_description || default_description)
+    link(rel="canonical", href=page_url || default_url)
+    //- HEAD OG
+    meta(itemprop="name", content=default_title)
+    meta(property="og:image", content=meta_og_image || default_og_image)
+    meta(property="og:title", content=meta_title || default_title)
+    meta(
+      property="og:description",
+      content=meta_description || default_description
+    )
+    meta(property="og:url", content=page_url || default_url)
+    meta(property="og:type", content=page_type || default_type)
+    include ./_partials/_head-js.pug
+    include ./_partials/_head-css.pug
+    include ./_partials/_head-analytics.pug
+    include ./_partials/_head-font.pug
+    block head
+  body
+    block outside
+    include ./_partials/_header.pug
+    .main-wrapper(
+      class=page_name && page_name !== "" && page_name !== false ? `main-wrapper--${page_name}` : ""
+    )
+      != "\n"
+      block contents
+    include ./_partials/_footer.pug
+    block foot

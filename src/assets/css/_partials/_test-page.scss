@@ -1,0 +1,417 @@
+// ビルドテスト用スタイル
+// このファイルは各種HTML要素とCSS機能のテスト用です
+
+.test-page {
+  padding: 2rem;
+  max-width: var(--width-max, 1280px);
+  margin: 0 auto;
+
+  // セクション共通
+  &__section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  &__title {
+    font-family: var(--font-en, sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-black, #222);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid #6366f1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: "✓";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #6366f1;
+      color: white;
+      border-radius: 50%;
+      font-size: 0.875rem;
+    }
+  }
+
+  // 見出しテスト
+  &__headings {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0.5rem 0;
+      font-family: var(--font-ja, serif);
+    }
+    h1 {
+      font-size: 2rem;
+      color: #1e293b;
+    }
+    h2 {
+      font-size: 1.75rem;
+      color: #334155;
+    }
+    h3 {
+      font-size: 1.5rem;
+      color: #475569;
+    }
+    h4 {
+      font-size: 1.25rem;
+      color: #64748b;
+    }
+    h5 {
+      font-size: 1.125rem;
+      color: #94a3b8;
+    }
+    h6 {
+      font-size: 1rem;
+      color: #cbd5e1;
+    }
+  }
+
+  // テキストテスト
+  &__text {
+    p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      color: var(--color-black, #222);
+    }
+
+    strong {
+      font-weight: 700;
+    }
+    em {
+      font-style: italic;
+    }
+    u {
+      text-decoration: underline;
+    }
+    s {
+      text-decoration: line-through;
+    }
+    mark {
+      background: #fef08a;
+      padding: 0.125rem 0.25rem;
+    }
+    code {
+      font-family: "Consolas", "Monaco", monospace;
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #6366f1;
+      text-decoration: underline;
+      transition: color var(--short-transition-time, 0.3s) var(--default-ease, ease);
+      &:hover {
+        color: #4f46e5;
+      }
+    }
+  }
+
+  // リストテスト
+  &__lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+
+    ul,
+    ol {
+      padding-left: 1.5rem;
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+    }
+
+    ul {
+      list-style-type: disc;
+      li::marker {
+        color: #6366f1;
+      }
+    }
+
+    ol {
+      list-style-type: decimal;
+      li::marker {
+        color: #6366f1;
+        font-weight: 700;
+      }
+    }
+  }
+
+  // テーブルテスト
+  &__table {
+    width: 100%;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    th,
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #1e293b;
+      color: white;
+      font-weight: 600;
+      font-family: var(--font-en, sans-serif);
+    }
+
+    tr:hover td {
+      background: #f1f5f9;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  // フォームテスト
+  &__form {
+    display: grid;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #475569;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color var(--short-transition-time, 0.3s) var(--default-ease, ease);
+
+      &:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-item,
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+
+      input {
+        width: 18px;
+        height: 18px;
+        accent-color: #6366f1;
+      }
+    }
+
+    button {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        transform var(--short-transition-time, 0.3s) var(--default-ease, ease),
+        box-shadow var(--short-transition-time, 0.3s) var(--default-ease, ease);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // 画像テスト
+  &__images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+
+    .image-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform var(--short-transition-time, 0.3s) var(--default-ease, ease);
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      img {
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .image-caption {
+        padding: 1rem;
+        font-size: 0.875rem;
+        color: #64748b;
+        text-align: center;
+      }
+    }
+  }
+
+  // アニメーションテスト
+  &__animations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+
+    .anim-box {
+      padding: 2rem;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      font-family: var(--font-en, sans-serif);
+    }
+  }
+
+  // CSS変数テスト
+  &__variables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+
+    .var-box {
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-family: var(--font-en, sans-serif);
+
+      &--black {
+        background: var(--color-black, #222);
+        color: var(--color-white, #fff);
+      }
+
+      &--white {
+        background: var(--color-white, #fff);
+        color: var(--color-black, #222);
+        border: 2px solid var(--color-black, #222);
+      }
+
+      &--font-en {
+        font-family: var(--font-en, sans-serif);
+        font-size: 1rem;
+      }
+
+      &--font-ja {
+        font-family: var(--font-ja, serif);
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // グリッドテスト
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0.5rem;
+
+    .grid-item {
+      padding: 1rem;
+      background: #6366f1;
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: var(--font-en, sans-serif);
+
+      @for $i from 1 through 12 {
+        &--#{$i} {
+          grid-column: span #{$i};
+        }
+      }
+    }
+  }
+
+  // レスポンシブインジケーター
+  &__responsive {
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-family: var(--font-en, sans-serif);
+    background: #10b981;
+    color: white;
+
+    &::after {
+      content: "Mobile View";
+    }
+
+    @media (min-width: 768px) {
+      background: #f59e0b;
+      &::after {
+        content: "Tablet View (768px+)";
+      }
+    }
+
+    @media (min-width: 1024px) {
+      background: #6366f1;
+      &::after {
+        content: "Desktop View (1024px+)";
+      }
+    }
+
+    @media (min-width: 1280px) {
+      background: #ec4899;
+      &::after {
+        content: "Large Desktop View (1280px+)";
+      }
+    }
+  }
+}

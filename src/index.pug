@@ -1,0 +1,290 @@
+extends ./_layout.pug
+block vars
+  -
+    var meta_title = "Vite+ Pug Starter";
+    var meta_description = "Vite+ / Pug / SCSS / JavaScript の現行構成に合わせたスタータートップページ";
+    var page_type = "website";
+    var page_name = "home";
+block outside
+
+block head
+
+block contents
+  .home-page
+    .home-page__backdrop(aria-hidden="true")
+      span.home-page__orb.home-page__orb--one
+      span.home-page__orb.home-page__orb--two
+      span.home-page__orb.home-page__orb--three
+
+    section.home-page__hero
+      .home-page__hero-copy
+        p.home-page__eyebrow.base-anime(data-anim-preset="fade-right") Vite+ Unified Starter
+        h1.home-page__headline.base-anime(data-anim-duration="0.95", data-anim-delay="0.08")
+          | Pugで設計し、
+          br
+          | SCSSで整え、
+          br
+          | Vite+で素早く仕上げる。
+        p.home-page__lead.base-anime(data-anim-delay="0.18")
+          | このテンプレートは、マルチページの Pug 構成と SCSS partial、
+          | ES Modules、画像アセット処理をまとめて扱える現行構成です。
+          | 最初の 1 ページ目として、そのまま案件向けトップページへ育てられます。
+        .home-page__hero-actions.base-anime(data-anim-delay="0.28")
+          a.home-page__button.home-page__button--primary(href="#workflow") 開発フローを見る
+          a.home-page__button.home-page__button--ghost(href="#structure") 構成を確認する
+        ul.home-page__hero-metrics(
+          data-anim-target="> li",
+          data-anim-stagger="0.1",
+          data-anim-delay="0.38"
+        )
+          li.base-anime
+            strong Pug
+            span レイアウト継承と partial 分割
+          li.base-anime
+            strong SCSS
+            span 変数と partial をまとめて管理
+          li.base-anime
+            strong Vite+
+            span `vp` ベースの統一ワークフロー
+
+      aside.home-page__hero-panel(
+        data-anim-target="> .home-page__panel-card",
+        data-anim-preset="fade-left",
+        data-anim-stagger="0.14",
+        data-anim-start="top 80%"
+      )
+        .home-page__panel-card.base-anime
+          p.home-page__panel-label Current stack
+          ul.home-page__stack-list
+            li Vite+ / Rolldown ベースの高速ビルド
+            li Pug レイアウト + 静的マルチページ出力
+            li Sass partial と JS モジュールの同時運用
+            li GSAP / Splide を含む拡張余地
+        .home-page__panel-card.base-anime
+          p.home-page__panel-label Quick commands
+          ul.home-page__command-list
+            li
+              code vp install
+              span 依存関係を同期
+            li
+              code vp dev
+              span ローカル確認を開始
+            li
+              code vp check
+              span フォーマット・Lint・型検査
+            li
+              code vp build
+              span 本番用にビルド
+
+    section#overview.home-page__section.base-anime(data-anim-start="top 78%")
+      .home-page__section-heading
+        p.home-page__section-label Capabilities
+        h2.home-page__section-title 今の環境で、そのまま着手できること
+        p.home-page__section-lead
+          | テンプレート、スタイル、スクリプト、アセットの入口が揃っているので、
+          | 必要な箇所からすぐ案件向けに差し替えられます。
+      .home-page__feature-grid
+        article.home-page__feature
+          p.home-page__feature-index 01
+          h3 Pug multi-page
+          p `src/**/*.pug` がそのまま HTML 化されるため、ページ単位の量産がしやすい構成です。
+        article.home-page__feature
+          p.home-page__feature-index 02
+          h3 SCSS partials
+          p `main.scss` から partial を束ねる構成なので、案件単位のテーマ調整にも向いています。
+        article.home-page__feature
+          p.home-page__feature-index 03
+          h3 Modern JS entry
+          p `main.js` で共通初期化を一元管理でき、Scroll アニメーションの導線も既にあります。
+        article.home-page__feature
+          p.home-page__feature-index 04
+          h3 Asset pipeline
+          p 画像や CSS / JS の出力先が整理されており、ビルド後の配信構成も読みやすいままです。
+
+    section#workflow.home-page__section.base-anime(
+      data-anim-start="top 78%",
+      data-anim-duration="0.9"
+    )
+      .home-page__section-heading
+        p.home-page__section-label Workflow
+        h2.home-page__section-title 開発フローを 4 ステップで回せます
+      ol.home-page__workflow
+        li.home-page__workflow-step
+          span.home-page__workflow-number 01
+          div
+            h3
+              code vp install
+            p 依存関係を同期し、プロジェクトの実行環境を揃えます。
+        li.home-page__workflow-step
+          span.home-page__workflow-number 02
+          div
+            h3
+              code vp dev
+            p Pug / SCSS / JS を監視しながら、ローカルで即時に反映を確認します。
+        li.home-page__workflow-step
+          span.home-page__workflow-number 03
+          div
+            h3
+              code vp check
+            p フォーマット、Lint、TypeScript チェックをまとめて通して整合性を確認します。
+        li.home-page__workflow-step
+          span.home-page__workflow-number 04
+          div
+            h3
+              code vp build
+            p 設定した出力先に本番出力し、静的ファイル一式として確認・納品できます。
+
+    section#structure.home-page__section.base-anime(data-anim-start="top 78%")
+      .home-page__section-heading
+        p.home-page__section-label Structure
+        h2.home-page__section-title 触り始める場所がすぐ分かる構成です
+      .home-page__structure-grid
+        article.home-page__structure-card
+          h3 src/index.pug
+          p 公開トップページ。今回ここを現行環境向けの案内ページとして刷新しています。
+        article.home-page__structure-card
+          h3 src/assets/css/main.scss
+          p 全体の SCSS 入口。partial をまとめて読み込み、ページごとのスタイルもここから管理します。
+        article.home-page__structure-card
+          h3 src/assets/js/main.js
+          p 共通 JS の入口。ライブラリ初期化やページ全体で使う処理の集約ポイントです。
+        article.home-page__structure-card
+          h3 src/dev/index.pug
+          p サブディレクトリ出力の確認用ページ。配下ページのテンプレート検証にも使えます。
+
+    section#animation-guide.home-page__section.base-anime(data-anim-start="top 76%")
+      .home-page__section-heading
+        p.home-page__section-label Animation API
+        h2.home-page__section-title `data-*` だけでスクロール演出を指定できます
+        p.home-page__section-lead
+          | 単体要素の方向指定と、親トリガーからの stagger 指定を同じルールで扱えるようにしています。
+          | マークアップだけで演出の差を付けたいときに、そのまま流用できます。
+      .home-page__animation-layout
+        .home-page__animation-copy
+          .home-page__animation-rule
+            p.home-page__panel-label Setup rules
+            h3 指定の基本ルール
+            p
+              | 単体なら `.base-anime` に `data-anim-preset` や `data-anim-delay` を付与するだけで自動検出されます。
+              | 複数要素なら親に `data-anim-target` と `data-anim-stagger` を持たせ、子を `.base-anime` にします。
+            ul.home-page__checklist
+              li `data-anim-*` が付いた要素は自動でトリガー化
+              li `.base-anime` は初期非表示と FOUC 防止用
+              li `data-anim` は既存互換、今後は `data-anim-class` を優先
+          .home-page__animation-attribute-grid
+            article.home-page__animation-attribute
+              p.home-page__panel-label Direction
+              h3 data-anim-preset
+              p `fade-up` / `fade-left` / `zoom-in` などの基本演出を切り替えます。
+            article.home-page__animation-attribute
+              p.home-page__panel-label Timing
+              h3 data-anim-delay / duration
+              p 1要素ごとの出る順番やスピードを調整します。
+            article.home-page__animation-attribute
+              p.home-page__panel-label Group
+              h3 data-anim-target / stagger
+              p 親トリガーから子要素群へまとめて発火し、カードやリストを連続表示できます。
+            article.home-page__animation-attribute
+              p.home-page__panel-label Fine tune
+              h3 data-anim-x / y / scale
+              p preset をベースに、移動量や拡大率だけを局所的に上書きできます。
+          .home-page__animation-snippets
+            pre.home-page__code-block
+              code.
+                .base-anime(
+                  data-anim-preset="fade-left",
+                  data-anim-delay="0.12"
+                )
+            pre.home-page__code-block
+              code.
+                ul(
+                  data-anim-target="> li",
+                  data-anim-stagger="0.1"
+                )
+                  li.base-anime
+                  li.base-anime
+        .home-page__animation-demo
+          .home-page__demo-stage
+            p.home-page__panel-label Live demo
+            .home-page__demo-grid
+              article.home-page__demo-card.base-anime(
+                data-anim-preset="fade-right",
+                data-anim-delay="0.04"
+              )
+                p.home-page__demo-card-label Preset
+                h3.home-page__demo-card-title Fade Right
+                p.home-page__demo-card-meta data-anim-preset="fade-right"
+              article.home-page__demo-card.base-anime(
+                data-anim-preset="zoom-in",
+                data-anim-duration="0.95",
+                data-anim-delay="0.14"
+              )
+                p.home-page__demo-card-label Scale
+                h3.home-page__demo-card-title Zoom In
+                p.home-page__demo-card-meta data-anim-preset="zoom-in"
+            ul.home-page__demo-tags(
+              data-anim-target="> li",
+              data-anim-stagger="0.08",
+              data-anim-delay="0.24",
+              data-anim-preset="fade-up"
+            )
+              li.base-anime data-anim-target
+              li.base-anime data-anim-stagger
+              li.base-anime data-anim-delay
+              li.base-anime data-anim-y
+            .home-page__demo-card.home-page__demo-card--accent.base-anime(
+              data-anim-preset="fade-up",
+              data-anim-y="34",
+              data-anim-duration="0.88",
+              data-anim-delay="0.3"
+            )
+              p.home-page__demo-card-label Override
+              h3.home-page__demo-card-title Custom Offset
+              p.home-page__demo-card-meta `data-anim-y="34"` で移動量を上書き
+
+    section.home-page__section.home-page__section--showcase
+      .home-page__showcase-media.base-anime(data-anim-preset="fade-right")
+        img(
+          src="/assets/img/img_sample.jpg",
+          alt="アセット処理サンプル",
+          loading="lazy"
+        )
+      .home-page__showcase-copy.base-anime(
+        data-anim-preset="fade-left",
+        data-anim-delay="0.08"
+      )
+        p.home-page__section-label Asset + JavaScript
+        h2.home-page__section-title 素材差し替えと演出追加にもそのまま進めます
+        p.home-page__section-lead
+          | 画像や CSS / JS は Vite が `basePath` を反映してビルドし、JavaScript では Scroll アニメーションの導線が用意されています。
+          | まず静的な情報設計を固めてから、GSAP や Splide の追加演出に広げる進め方がしやすい構成です。
+        ul.home-page__checklist
+          li `main.js` で共通初期化を管理
+          li `main.scss` でページ単位の見た目を整理
+          li `config.js` の `basePath` を変えても `/dev/` 側の確認がしやすい
+        .home-page__status-card
+          p.home-page__status-title Ready for customization
+          dl.home-page__status-list
+            div
+              dt Layout
+              dd `_layout.pug` 継承
+            div
+              dt Style
+              dd `home-page` 専用 SCSS
+            div
+              dt Build
+              dd `vp` コマンドに統一
+
+    section.home-page__cta.base-anime(
+      data-anim-preset="zoom-in",
+      data-anim-duration="0.9"
+    )
+      p.home-page__section-label Ready to edit
+      h2.home-page__section-title このトップページを土台に、案件向け要素へそのまま差し替えられます
+      p.home-page__section-lead
+        | ヒーロー、特徴紹介、導線、補足セクションまで揃えたので、
+        | あとは文言・画像・配色を案件仕様に寄せていけば実運用のトップページへ移行できます。
+      .home-page__hero-actions
+        a.home-page__button.home-page__button--primary(href=pathTo("/dev/")) /dev の出力を確認
+        a.home-page__button.home-page__button--ghost(href="#overview") ページ上部へ戻る
+      p.home-page__footnote Template updated: #{new Date().toLocaleDateString("ja-JP")}
