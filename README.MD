@@ -3,6 +3,19 @@
 `Vite+` を主導線に、`Pug`、`SCSS`、`JavaScript` で静的サイトを構築するスターターテンプレートです。  
 マルチページ出力、画像アセット処理、Sass partial、共通 JS エントリーに加え、runtime 管理、品質チェック、CI、hook を `vp` ベースで揃えています。
 
+## 主な機能
+
+- **マルチページ静的サイト生成**: `src/**/[^_]*.pug` を個別ページとして出力します（`vite-plugin-glob-input` + `vite-pug-static-builder`）。`_` で始まる Pug は partial 扱いで単体出力されません。
+- **共通レイアウトと partial**: `src/_layout.pug` を `extends` し、`src/_partials/` の `head` / `header` / `footer` などを `include` します。
+- **SCSS ビルド**: `src/assets/css/main.scss` を入口に、`vite-plugin-sass-glob-import` で partial を glob import し、`postcss.config.js` の `autoprefixer` でベンダープレフィックスを付与します。
+- **共通 JS エントリー**: `src/assets/js/main.js` を入口に、`gsap`（`ScrollTrigger`）と `@splidejs/splide` を同梱しています。
+- **画像の CLS 対策**: `vite-plugin-image-sizes` が `img` / `source` に `width` / `height` を自動付与し、`loading="lazy"` を注入します（`vite.config.ts` の `addLazyLoading: true`）。
+- **コンテンツハッシュ**: `hashMode`（`filename` / `query` / `false`）でキャッシュバスティング方式を切り替えます（`config.js` と `build-utils.js`）。
+- **basePath 追従**: Pug locals の `basePath` と `pathTo()` でサブパス配備に対応します（`build-utils.js`）。
+- **配布用 HTML 整形**: ビルド後に `scripts/format-build-html.mjs` が `dist/**/*.html` のみを整形し、JS / CSS は minified のまま維持します。
+- **環境変数によるビルド制御**: `HASH_MODE` / `VITE_HASH_MODE`、`VITE_SOURCEMAP`、`VITE_BASE_PATH`、`VITE_USE_POLLING` でビルド時の挙動を上書きできます。
+- **CI と Git hooks**: GitHub Actions（`voidzero-dev/setup-vp`）と pre-commit（`vp staged`）を同梱しています。
+
 ## Vite+ を使う利点
 
 - runtime 管理、依存同期、dev、check、test、build、CI までを `vp` に寄せられる
@@ -98,24 +111,29 @@ vp run build:dist
 ```text
 viteplus_template/
 ├── src/
-│   ├── _layout.pug
-│   ├── _partials/
+│   ├── _layout.pug              # 共通レイアウト（各ページが extends）
+│   ├── _partials/               # head / header / footer などの partial
 │   ├── assets/
-│   │   ├── css/
-│   │   ├── img/
-│   │   └── js/
+│   │   ├── css/                 # main.scss と _partials/ の SCSS
+│   │   ├── img/                 # 画像アセット
+│   │   └── js/                  # main.js とコンポーネント
 │   ├── dev/
-│   │   └── index.pug
-│   ├── build-system.test.js
-│   └── index.pug
-├── build-utils.js
-├── config.js
+│   │   └── index.pug            # サブディレクトリ出力の確認用ページ
+│   ├── build-system.test.js     # build-utils.js のユニットテスト
+│   └── index.pug                # トップページ
 ├── scripts/
-│   └── format-build-html.mjs
-├── vite.config.ts
-├── postcss.config.js
-├── package.json
-├── .node-version
+│   └── format-build-html.mjs    # ビルド後の dist/**/*.html 整形
+├── build-utils.js               # basePath / ハッシュ / HTML 書き換えのヘルパ
+├── config.js                    # サイト・ビルドオプション
+├── vite.config.ts               # build / test / run / staged / lint の設定
+├── postcss.config.js            # autoprefixer 設定
+├── package.json                 # vp ベースの script alias と依存関係
+├── .node-version                # Node.js バージョン固定（22）
+├── .vite-hooks/pre-commit       # pre-commit から vp staged を呼ぶ
+├── .github/workflows/ci.yml     # CI（setup-vp → vp run ci）
+├── AGENTS.md                    # コーディングエージェント向けガイド
+├── CLAUDE.md                    # AGENTS.md へのシンボリックリンク
+├── .cursor/rules/viteplus.mdc   # Cursor 用ルール（AGENTS.md と同内容）
 └── README.MD
 ```
 
@@ -181,6 +199,19 @@ vp run build:dist
 - `config.js` の `basePath`、`hashMode`、`sourceMap` は build 時の振る舞いをまとめて制御します
 
 `vp build` は純粋な Vite build、`vp run build:dist` はこのテンプレート向けの配布 build です。
+
+## 環境変数
+
+ビルド時の挙動は `config.js` の既定値を環境変数で上書きできます（`vite.config.ts` と `build-utils.js` で解決）。
+
+| 環境変数                       | 対応する `config.js`           | 値                                           | 既定       |
+| ------------------------------ | ------------------------------ | -------------------------------------------- | ---------- |
+| `HASH_MODE` / `VITE_HASH_MODE` | `hashMode`                     | `filename` / `query` / `false`(`none`/`off`) | `filename` |
+| `VITE_SOURCEMAP`               | `sourceMap`                    | `true` / `false`（`1`/`0`、`on`/`off` も可） | `false`    |
+| `VITE_BASE_PATH`               | `basePath`                     | 配備先のベースパス（例 `/preview/`）         | `/`        |
+| `VITE_USE_POLLING`             | -（`server.watch.usePolling`） | `true` で watch をポーリングに切り替え       | 無効       |
+
+`VITE_HASH_MODE` は `HASH_MODE` より優先されます。
 
 ## フォーマット方針
 
@@ -264,3 +295,7 @@ vp run build:dist
 ```
 
 Pug / SCSS / JS / ビルド設定のどれを変更しても、この 2 つを最低ラインの確認手順にしてください。
+
+## ライセンス
+
+`package.json` は `"private": true` で、ライセンスは明示的に指定されていません（`LICENSE` ファイルはありません）。社内・個人でのテンプレート利用を想定しています。公開・配布する場合は、`package.json` の `license` フィールドと `LICENSE` ファイルを追加してください。
