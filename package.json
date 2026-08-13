@@ -29,6 +29,7 @@
     "lightningcss": "^1.33.0",
     "prettier": "^3.9.6",
     "sass": "^1.102.0",
+    "typescript": "^7.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@0.2.9",
     "vite-plugin-glob-input": "^0.3.0",
     "vite-plugin-image-sizes": "^1.1.2",
