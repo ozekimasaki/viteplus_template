@@ -1,0 +1,20 @@
+//- ページ共通の document meta / OGP
+mixin site-meta
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  title #{ meta_title || default_title }
+  meta(name="description", content=meta_description || default_description)
+  link(rel="canonical", href=page_url || default_url)
+  //- Favicon（必要に応じてパスを差し替え）
+  //- link(rel="icon", href="/assets/img/favicon.ico", sizes="any")
+  //- link(rel="apple-touch-icon", href="/assets/img/apple-touch-icon.png")
+  meta(property="og:site_name", content=meta_site_name || default_site_name)
+  meta(property="og:locale", content=meta_locale || default_locale)
+  meta(property="og:image", content=meta_og_image || default_og_image)
+  meta(property="og:title", content=meta_title || default_title)
+  meta(
+    property="og:description",
+    content=meta_description || default_description
+  )
+  meta(property="og:url", content=page_url || default_url)
+  meta(property="og:type", content=page_type || default_type)

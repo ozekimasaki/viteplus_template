@@ -1,6 +1,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { cwd, env } from "node:process";
+import browserslist from "browserslist";
 import { glob } from "glob";
+import { browserslistToTargets } from "lightningcss";
 import { defineConfig, type Plugin } from "vite-plus";
 import pugPlugin from "vite-pug-static-builder";
 import globInput from "vite-plugin-glob-input";
@@ -159,6 +161,12 @@ export default defineConfig({
     port: config.port,
     watch: {
       usePolling: env.VITE_USE_POLLING === "true",
+    },
+  },
+  css: {
+    transformer: "lightningcss",
+    lightningcss: {
+      targets: browserslistToTargets(browserslist()),
     },
   },
   build: {

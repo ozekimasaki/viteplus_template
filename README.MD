@@ -46,12 +46,11 @@
 
 - Node.js: `22`
 - npm: `11.11.1`
-- vite-plus: `0.1.11`
-- vite: `8.0.0`
-- rolldown: `1.0.0-rc.9`
-- vitest: `4.1.0`
+- vite-plus: `0.2.9`
+- vite: `@voidzero-dev/vite-plus-core@0.2.9`
+- vitest: `4.1.10`
 
-`vite-plus` / `vite-plus-core` / `vite-plus-test` は動作確認済みバージョンに固定しています。更新時は明示的にバージョンを上げ、`vp run ci` で確認してください。
+`vite-plus` / `vite-plus-core` は動作確認済みバージョンに固定しています。`vitest` は Vite+ 同梱の `4.1.10` を overrides しています。更新時は明示的にバージョンを上げ、`vp run ci` で確認してください。
 
 ## 必要環境
 
@@ -113,7 +112,6 @@ viteplus_template/
 ├── scripts/
 │   └── format-build-html.mjs
 ├── vite.config.ts
-├── postcss.config.js
 ├── package.json
 ├── .node-version
 └── README.MD
@@ -149,6 +147,8 @@ vp dev
 
 - `src/**/*.pug` を静的 HTML として扱います
 - `_` で始まる Pug は partial 扱いで単体出力されません
+- 共通 meta / OGP は `src/_partials/_meta.pug` の mixin です
+- CSS のベンダープレフィックスは Lightning CSS が付与します
 - `src/assets/css/main.scss` と `src/assets/js/main.js` が入口です
 - `src/dev/index.pug` はサブディレクトリ出力の確認用です
 
