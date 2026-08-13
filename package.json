@@ -1,6 +1,6 @@
 {
   "name": "vite-template",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,31 +19,32 @@
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
-    "gsap": "^3.13.0"
+    "gsap": "^3.15.0"
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.4.2",
-    "@types/node": "^25.5.0",
-    "autoprefixer": "^10.4.19",
+    "@types/node": "^26.2.0",
+    "browserslist": "^4.28.8",
     "glob": "^13.0.6",
-    "prettier": "^3.4.2",
-    "sass": "^1.98.0",
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.11",
+    "lightningcss": "^1.33.0",
+    "prettier": "^3.9.6",
+    "sass": "^1.102.0",
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.9",
     "vite-plugin-glob-input": "^0.3.0",
     "vite-plugin-image-sizes": "^1.1.2",
     "vite-plugin-sass-glob-import": "^6.0.0",
-    "vite-plus": "0.1.11",
+    "vite-plus": "0.2.9",
     "vite-pug-static-builder": "^1.1.5"
   },
   "overrides": {
-    "vite": "npm:@voidzero-dev/vite-plus-core@0.1.11",
-    "vitest": "npm:@voidzero-dev/vite-plus-test@0.1.11"
+    "vite": "npm:@voidzero-dev/vite-plus-core@0.2.9",
+    "vitest": "4.1.10"
   },
   "browserslist": [
     "defaults"
   ],
   "engines": {
-    "node": ">=22.0.0"
+    "node": "^22.18.0 || >=24.11.0"
   },
   "packageManager": "npm@11.11.1"
 }
