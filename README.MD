@@ -49,6 +49,9 @@
 - vite-plus: `0.2.9`
 - vite: `@voidzero-dev/vite-plus-core@0.2.9`
 - vitest: `4.1.10`
+- vite-plugin-glob-input: `0.4.1`
+- vite-plugin-image-sizes: `1.3.1`
+- vite-pug-static-builder: `1.3.1`
 
 `vite-plus` / `vite-plus-core` は動作確認済みバージョンに固定しています。`vitest` は Vite+ 同梱の `4.1.10` を overrides しています。更新時は明示的にバージョンを上げ、`vp run ci` で確認してください。
 
